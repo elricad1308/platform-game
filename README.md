@@ -21,7 +21,7 @@ El proyecto del juego ha sido configurado para trabajar con `npm`, al igual que 
 
 ## Licencia
 
-Este proyecto se distribuye bajo la licencia MIT. Consulte el archivo [LICENCE.md](LICENSE.md) para más detalles.
+Este proyecto se distribuye bajo la licencia MIT. Consulte el archivo [LICENSE.md](LICENSE.md) para más detalles.
 
 ## Agradecimientos 
 
