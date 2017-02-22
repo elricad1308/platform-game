@@ -1,0 +1,38 @@
+{
+  "name": "platform-game",
+  "version": "1.0.0",
+  "description": "Juego de Plataformas creado a partir del Curso de Codigo Facilito",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elricad1308/platform-game.git"
+  },
+  "author": "Ing. Jose Aguilar Canepa",
+  "license": "MIT",
+  "bugs": {
+    "url": "git+https://github.com/elricad1308/platform-game/issues"
+  },
+  "homepage": "https://github.com/elricad1308/platform-game#readme",
+  "dependencies": {
+    "kinetic": "^5.2.0",
+    "normalize.css": "^5.0.0",
+    "preload-js": "^0.6.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.4",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1",
+    "gulp-modernizr": "^1.0.0-alpha",
+    "gulp-postcss": "^6.3.0",
+    "gulp-watch": "^4.3.11",
+    "postcss-hexrgba": "^0.2.1",
+    "postcss-import": "^9.1.0",
+    "postcss-mixins": "^5.4.1",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^3.0.0",
+    "webpack": "^2.2.1"
+  }
+}
