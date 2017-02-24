@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/elricad1308/platform-game#readme",
   "dependencies": {
+    "jquery": "^3.1.1",
     "kinetic": "^5.2.0",
     "normalize.css": "^5.0.0",
     "preload-js": "^0.6.3"
