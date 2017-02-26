@@ -14,7 +14,6 @@ class Controller {
 
         this.document.keydown(function(e){
             self.keyboard[e.which] = true;
-            console.log(self.keyboard);
         });
 
         this.document.keyup(function(e){
@@ -22,6 +21,21 @@ class Controller {
         });
     }
 
+    down() {
+        return this.keyboard[40];
+    }
+
+    left() {
+        return this.keyboard[37];
+    }
+
+    right() {
+        return this.keyboard[39];
+    }
+
+    up() {
+        return this.keyboard[38];
+    }
 }
 
 export default Controller;

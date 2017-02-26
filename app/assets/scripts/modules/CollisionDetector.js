@@ -15,8 +15,9 @@ class CollisionDetector {
             }
         }
 
-        // A collides with B
+        // A gets inside B horizontally
         if(b.getX() <= a.getX() && b.getX() + b.getWidth() >= a.getX() + a.getWidth()) {
+            // A is completely inside B
             if(b.getY() <= a.getY() && b.getY() + b.getHeight() >= a.getY() + a.getHeight()) {
                 hit = true;
             }

@@ -15263,6 +15263,63 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var CollisionDetector = function () {
+    function CollisionDetector() {
+        _classCallCheck(this, CollisionDetector);
+    }
+
+    _createClass(CollisionDetector, [{
+        key: "detectCollision",
+        value: function detectCollision(a, b) {
+            var hit = false;
+
+            // Horizontal collisions
+            if (b.getX() + b.getWidth() >= a.getX() && b.getX() < a.getX() + a.getWidth()) {
+                // Vertical collisions
+                if (b.getY() + b.getHeight() >= a.getY() && b.getY() < a.getY() + a.getHeight()) {
+                    hit = true;
+                }
+            }
+
+            // A gets inside B horizontally
+            if (b.getX() <= a.getX() && b.getX() + b.getWidth() >= a.getX() + a.getWidth()) {
+                // A is completely inside B
+                if (b.getY() <= a.getY() && b.getY() + b.getHeight() >= a.getY() + a.getHeight()) {
+                    hit = true;
+                }
+            }
+
+            // B collides with A
+            if (a.getX() <= b.getX() && a.getX() + a.getWidth() >= b.getX() + b.getWidth()) {
+                if (a.getY() <= b.getY() && a.getY() + a.getHeight() >= b.getY() + b.getHeight()) {
+                    hit = true;
+                }
+            }
+
+            return hit;
+        }
+    }]);
+
+    return CollisionDetector;
+}();
+
+exports.default = CollisionDetector;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _jquery = __webpack_require__(8);
 
 var _jquery2 = _interopRequireDefault(_jquery);
@@ -15288,12 +15345,31 @@ var Controller = function () {
 
             this.document.keydown(function (e) {
                 self.keyboard[e.which] = true;
-                console.log(self.keyboard);
             });
 
             this.document.keyup(function (e) {
                 self.keyboard[e.which] = false;
             });
+        }
+    }, {
+        key: 'down',
+        value: function down() {
+            return this.keyboard[40];
+        }
+    }, {
+        key: 'left',
+        value: function left() {
+            return this.keyboard[37];
+        }
+    }, {
+        key: 'right',
+        value: function right() {
+            return this.keyboard[39];
+        }
+    }, {
+        key: 'up',
+        value: function up() {
+            return this.keyboard[38];
         }
     }]);
 
@@ -15303,7 +15379,7 @@ var Controller = function () {
 exports.default = Controller;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15340,8 +15416,13 @@ var Hero = function (_Kinetic$Rect) {
         _this.direction = 1;
         _this.counter = 0;
 
+        _this.rightLimit = 0;
+
         _this.setHeight(70);
+        _this.setFill('#184164');
         _this.setWidth(40);
+        _this.setX(0);
+        _this.setY(0);
 
         console.log('Hero created!');
         return _this;
@@ -15349,7 +15430,14 @@ var Hero = function (_Kinetic$Rect) {
 
     _createClass(Hero, [{
         key: 'goBack',
-        value: function goBack() {}
+        value: function goBack() {
+            this.move({ x: -this.xSpeed, y: 0 });
+
+            // Prevents the hero to escaping from screen!
+            if (this.getX() < 0) {
+                this.move({ x: -this.getX(), y: 0 });
+            }
+        }
     }, {
         key: 'fallDown',
         value: function fallDown() {}
@@ -15358,44 +15446,20 @@ var Hero = function (_Kinetic$Rect) {
         value: function jump() {}
     }, {
         key: 'walk',
-        value: function walk() {}
+        value: function walk() {
+            this.move({ x: this.xSpeed, y: 0 });
+
+            // Prevents the hero to escaping from screen!
+            if (this.getX() > this.rightLimit) {
+                this.move({ x: this.rightLimit - this.getX(), y: 0 });
+            }
+        }
     }]);
 
     return Hero;
 }(_kinetic2.default.Rect);
 
 exports.default = Hero;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _kinetic = __webpack_require__(0);
-
-var _kinetic2 = _interopRequireDefault(_kinetic);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Stage = function Stage() {
-    _classCallCheck(this, Stage);
-
-    this.stage = new _kinetic2.default.Stage({
-        container: "game",
-        width: 960,
-        height: 500
-    });
-};
-
-exports.default = Stage;
 
 /***/ }),
 /* 7 */,
@@ -25632,23 +25696,85 @@ return jQuery;
 "use strict";
 
 
-var _Stage = __webpack_require__(6);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Stage2 = _interopRequireDefault(_Stage);
+var _kinetic = __webpack_require__(0);
 
-var _Hero = __webpack_require__(5);
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+var _Hero = __webpack_require__(6);
 
 var _Hero2 = _interopRequireDefault(_Hero);
 
-var _Controller = __webpack_require__(4);
+var _Controller = __webpack_require__(5);
 
 var _Controller2 = _interopRequireDefault(_Controller);
 
+var _CollisionDetector = __webpack_require__(4);
+
+var _CollisionDetector2 = _interopRequireDefault(_CollisionDetector);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var stage = new _Stage2.default();
-var controller = new _Controller2.default();
-var hero = new _Hero2.default();
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Game = function () {
+    function Game() {
+        _classCallCheck(this, Game);
+
+        this.stage = new _kinetic2.default.Stage({
+            container: "game",
+            width: 960,
+            height: 500
+        });
+        this.background = undefined;
+        this.controller = new _Controller2.default();
+        this.hero = new _Hero2.default();
+
+        this.configPlayer();
+        this.drawBackground();
+
+        this.self = setInterval(this.frameLoop.bind(this), 1000 / 20);
+    }
+
+    _createClass(Game, [{
+        key: 'configPlayer',
+        value: function configPlayer() {
+            // Positions the player at the bottom of the screen
+            this.hero.setY(this.stage.getHeight() - this.hero.getHeight());
+
+            // Sets the player right limit (so that he cannot move outside the canvas!)
+            this.hero.rightLimit = this.stage.getWidth() - this.hero.getWidth();
+        }
+    }, {
+        key: 'drawBackground',
+        value: function drawBackground() {
+            this.background = new _kinetic2.default.Layer({});
+            this.background.add(this.hero);
+            this.stage.add(this.background);
+        }
+    }, {
+        key: 'frameLoop',
+        value: function frameLoop() {
+            this.movePlayer();
+            this.stage.draw();
+        }
+    }, {
+        key: 'movePlayer',
+        value: function movePlayer() {
+            if (this.controller.right()) {
+                this.hero.walk();
+            }
+            if (this.controller.left()) {
+                this.hero.goBack();
+            }
+        }
+    }]);
+
+    return Game;
+}();
+
+new Game();
 
 /***/ })
 /******/ ]);
