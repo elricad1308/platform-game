@@ -1,11 +1,20 @@
-class Enemy {
+import Kinetic from 'kinetic';
+
+class Enemy extends Kinetic.Rect {
 
     constructor(spawnX, spawnY) {
-        this.width = 60;
-        this.height = 60;
+        super({
+          x: spawnX,
+          y: spawnY
+        });
+
         this.counter = 0;
-        this.x = spawnX;
-        this.y = spawnY;
+
+        this.setHeight(60);
+        this.setFill('darkred');
+        this.setWidth(60);
+
+
     }
 
     generateRandomNumber(min, max) {
@@ -17,7 +26,9 @@ class Enemy {
     }
 
     move() {
+        this.counter++;
 
+        this.setX(this.getX() + Math.sin(this.counter * Math.PI / 50) * 5);
     }
 
 }

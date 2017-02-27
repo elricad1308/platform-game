@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -15320,7 +15320,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jquery = __webpack_require__(8);
+var _jquery = __webpack_require__(12);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -15403,6 +15403,134 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Enemy = function (_Kinetic$Rect) {
+    _inherits(Enemy, _Kinetic$Rect);
+
+    function Enemy(spawnX, spawnY) {
+        _classCallCheck(this, Enemy);
+
+        var _this = _possibleConstructorReturn(this, (Enemy.__proto__ || Object.getPrototypeOf(Enemy)).call(this, {
+            x: spawnX,
+            y: spawnY
+        }));
+
+        _this.counter = 0;
+
+        _this.setHeight(60);
+        _this.setFill('darkred');
+        _this.setWidth(60);
+
+        return _this;
+    }
+
+    _createClass(Enemy, [{
+        key: 'generateRandomNumber',
+        value: function generateRandomNumber(min, max) {
+            var range = max - min;
+            var random = Math.random() * range;
+            random = Math.floor(random);
+
+            return parseInt(min) + random;
+        }
+    }, {
+        key: 'move',
+        value: function move() {
+            this.counter++;
+
+            this.setX(this.getX() + Math.sin(this.counter * Math.PI / 50) * 5);
+        }
+    }]);
+
+    return Enemy;
+}(_kinetic2.default.Rect);
+
+exports.default = Enemy;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EnemyGroup = function (_Kinetic$Group) {
+    _inherits(EnemyGroup, _Kinetic$Group);
+
+    function EnemyGroup(originX, originY) {
+        _classCallCheck(this, EnemyGroup);
+
+        return _possibleConstructorReturn(this, (EnemyGroup.__proto__ || Object.getPrototypeOf(EnemyGroup)).call(this, {
+            x: originX,
+            y: originY
+        }));
+    }
+
+    _createClass(EnemyGroup, [{
+        key: 'moveEnemies',
+        value: function moveEnemies() {
+            this.getChildren().forEach(function (enemy) {
+                enemy.move();
+            });
+        }
+    }]);
+
+    return EnemyGroup;
+}(_kinetic2.default.Group);
+
+exports.default = EnemyGroup;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Gravity force that pushes the player towards the bottom.
+var GRAVITY = 0.8;
+
+// Heigth that the player moves upward when jumping
+var JUMP_HEIGHT = -15;
+
+// Max number of times a player can jump in a row
+var JUMP_LIMIT = 2 * 2;
+
 var Hero = function (_Kinetic$Rect) {
     _inherits(Hero, _Kinetic$Rect);
 
@@ -15416,6 +15544,7 @@ var Hero = function (_Kinetic$Rect) {
         _this.direction = 1;
         _this.counter = 0;
 
+        _this.bottomLimit = 0;
         _this.rightLimit = 0;
 
         _this.setHeight(70);
@@ -15440,10 +15569,27 @@ var Hero = function (_Kinetic$Rect) {
         }
     }, {
         key: 'fallDown',
-        value: function fallDown() {}
+        value: function fallDown() {
+            this.ySpeed += GRAVITY;
+            this.move({ x: 0, y: this.ySpeed });
+
+            // Prevents the hero to falling down of screen!
+            if (this.getY() + this.getHeight() > this.bottomLimit) {
+                this.setY(this.bottomLimit - this.getHeight());
+
+                // Once in floor, stop falling down.
+                this.ySpeed = 0;
+                this.counter = 0;
+            }
+        }
     }, {
         key: 'jump',
-        value: function jump() {}
+        value: function jump() {
+            if (this.counter < JUMP_LIMIT) {
+                this.ySpeed = JUMP_HEIGHT;
+                this.counter++;
+            }
+        }
     }, {
         key: 'walk',
         value: function walk() {
@@ -15462,8 +15608,93 @@ var Hero = function (_Kinetic$Rect) {
 exports.default = Hero;
 
 /***/ }),
-/* 7 */,
-/* 8 */
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Platform = function (_Kinetic$Rect) {
+    _inherits(Platform, _Kinetic$Rect);
+
+    function Platform(spawnX, spawnY) {
+        _classCallCheck(this, Platform);
+
+        var _this = _possibleConstructorReturn(this, (Platform.__proto__ || Object.getPrototypeOf(Platform)).call(this, {
+            x: spawnX,
+            y: spawnY
+        }));
+
+        _this.setHeight(40);
+        _this.setFill('fuchsia');
+        _this.setWidth(200);
+        return _this;
+    }
+
+    return Platform;
+}(_kinetic2.default.Rect);
+
+exports.default = Platform;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PlatformGroup = function (_Kinetic$Group) {
+    _inherits(PlatformGroup, _Kinetic$Group);
+
+    function PlatformGroup(originX, originY) {
+        _classCallCheck(this, PlatformGroup);
+
+        return _possibleConstructorReturn(this, (PlatformGroup.__proto__ || Object.getPrototypeOf(PlatformGroup)).call(this, {
+            x: originX,
+            y: originY
+        }));
+    }
+
+    return PlatformGroup;
+}(_kinetic2.default.Group);
+
+exports.default = PlatformGroup;
+
+/***/ }),
+/* 11 */,
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -25690,7 +25921,7 @@ return jQuery;
 
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25702,9 +25933,25 @@ var _kinetic = __webpack_require__(0);
 
 var _kinetic2 = _interopRequireDefault(_kinetic);
 
-var _Hero = __webpack_require__(6);
+var _Hero = __webpack_require__(8);
 
 var _Hero2 = _interopRequireDefault(_Hero);
+
+var _Enemy = __webpack_require__(6);
+
+var _Enemy2 = _interopRequireDefault(_Enemy);
+
+var _EnemyGroup = __webpack_require__(7);
+
+var _EnemyGroup2 = _interopRequireDefault(_EnemyGroup);
+
+var _Platform = __webpack_require__(9);
+
+var _Platform2 = _interopRequireDefault(_Platform);
+
+var _PlatformGroup = __webpack_require__(10);
+
+var _PlatformGroup2 = _interopRequireDefault(_PlatformGroup);
 
 var _Controller = __webpack_require__(5);
 
@@ -25727,14 +25974,19 @@ var Game = function () {
             width: 960,
             height: 500
         });
-        this.background = undefined;
+
         this.controller = new _Controller2.default();
         this.hero = new _Hero2.default();
+
+        // Declare variables that change with each level.
+        this.enemies = undefined;
+        this.platforms = undefined;
+        this.background = undefined;
 
         this.configPlayer();
         this.drawBackground();
 
-        this.self = setInterval(this.frameLoop.bind(this), 1000 / 20);
+        this.self = setInterval(this.frameLoop.bind(this), 1000 / 24);
     }
 
     _createClass(Game, [{
@@ -25745,28 +25997,65 @@ var Game = function () {
 
             // Sets the player right limit (so that he cannot move outside the canvas!)
             this.hero.rightLimit = this.stage.getWidth() - this.hero.getWidth();
+
+            // Sets the player bottom limit (so that he cannot fall down of the canvas!)
+            this.hero.bottomLimit = this.stage.getHeight();
         }
     }, {
         key: 'drawBackground',
         value: function drawBackground() {
             this.background = new _kinetic2.default.Layer({});
+
+            // Create the platforms
+            this.platforms = new _PlatformGroup2.default();
+
+            // Creates the floor
+            var floor = new _Platform2.default(0, this.stage.getHeight() - 15);
+            floor.setWidth(this.stage.getWidth() * 2);
+
+            this.platforms.add(floor);
+            this.platforms.add(new _Platform2.default(20, this.stage.getHeight() / 1.5));
+            this.platforms.add(new _Platform2.default(190, this.stage.getHeight() / 3));
+
+            // Create the enemies
+            this.enemies = new _EnemyGroup2.default();
+
+            this.enemies.add(new _Enemy2.default(200, this.stage.getHeight() - 75));
+            this.enemies.add(new _Enemy2.default(850, this.stage.getHeight() / 3.9 - 60));
+            this.enemies.add(new _Enemy2.default(170, this.stage.getHeight() / 3 - 60));
+            this.enemies.add(new _Enemy2.default(1020, this.stage.getHeight() - 75));
+            this.enemies.add(new _Enemy2.default(1120, this.stage.getHeight() - 75));
+            this.enemies.add(new _Enemy2.default(1220, this.stage.getHeight() - 75));
+
+            this.background.add(this.platforms);
+            this.background.add(this.enemies);
             this.background.add(this.hero);
+
             this.stage.add(this.background);
         }
     }, {
         key: 'frameLoop',
         value: function frameLoop() {
+            this.enemies.moveEnemies();
             this.movePlayer();
             this.stage.draw();
         }
     }, {
         key: 'movePlayer',
         value: function movePlayer() {
+            // Emulate gravity (always pushes down the player).
+            this.hero.fallDown();
+
             if (this.controller.right()) {
                 this.hero.walk();
             }
+
             if (this.controller.left()) {
                 this.hero.goBack();
+            }
+
+            if (this.controller.up()) {
+                this.hero.jump();
             }
         }
     }]);

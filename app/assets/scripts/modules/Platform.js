@@ -1,10 +1,16 @@
-class Platform {
+import Kinetic from 'kinetic';
+
+class Platform extends Kinetic.Rect {
 
     constructor(spawnX, spawnY) {
-        this.width = 200;
-        this.height = 40;
-        this.x = spawnX;
-        this.y = spawnY;
+        super({
+          x: spawnX,
+          y: spawnY
+        });
+
+        this.setHeight(40);
+        this.setFill('fuchsia');
+        this.setWidth(200);
     }
 }
 
