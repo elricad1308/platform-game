@@ -6,27 +6,32 @@ import Platform from './modules/Platform';
 import PlatformGroup from './modules/PlatformGroup';
 import Controller from './modules/Controller';
 import CollisionDetector from './modules/CollisionDetector';
+import ScoreManager from './modules/ScoreManager';
+import Level01 from './levels/Level01';
 
 class Game {
 
     constructor() {
+        // Initializes the game stage
         this.stage = new Kinetic.Stage({
             container: "game",
             width: 960,
             height: 500
         });
 
+        // Initializes the Game global variables
         this.controller = new Controller();
         this.hero = new Hero();
+        this.level = undefined;
+        this.currentLevel = 1;
+        this.scoreManager = new ScoreManager();
+        this.collisionDetector = new CollisionDetector(this.scoreManager);
 
-        // Declare variables that change with each level.
-        this.enemies = undefined;
-        this.platforms = undefined;
-        this.background = undefined;
-
+        // Performs the initial setup
         this.configPlayer();
         this.drawBackground();
 
+        // All things set. Ready to go!
         this.self = setInterval(this.frameLoop.bind(this), 1000/24);
     }
 
@@ -42,40 +47,33 @@ class Game {
     }
 
     drawBackground() {
-        this.background = new Kinetic.Layer({});
+        // Draws the background accordingly to the level
+        switch(this.currentLevel) {
+            case 1:
+                this.level = new Level01(this.stage.getWidth(), this.stage.getHeight());
+                break;
+        }
 
-        // Create the platforms
-        this.platforms = new PlatformGroup();
+        // Adds the player to the background
+        this.level.add(this.hero);
 
-        // Creates the floor
-        var floor = new Platform(0, this.stage.getHeight() - 15);
-        floor.setWidth(this.stage.getWidth() * 2);
+        // Adds the background (with the player) to the stage.
+        this.stage.add(this.level);
+    }
 
-        this.platforms.add(floor);
-        this.platforms.add(new Platform(20, this.stage.getHeight() / 1.5));
-        this.platforms.add(new Platform(190, this.stage.getHeight() / 3));
-
-        // Create the enemies
-        this.enemies = new EnemyGroup();
-
-        this.enemies.add(new Enemy(200, this.stage.getHeight() - 75));
-        this.enemies.add(new Enemy(850, this.stage.getHeight() / 3.9 - 60));
-        this.enemies.add(new Enemy(170, this.stage.getHeight() / 3 - 60));
-        this.enemies.add(new Enemy(1020, this.stage.getHeight() - 75));
-        this.enemies.add(new Enemy(1120, this.stage.getHeight() - 75));
-        this.enemies.add(new Enemy(1220, this.stage.getHeight() - 75));
-
-        this.background.add(this.platforms);
-        this.background.add(this.enemies);
-        this.background.add(this.hero);
-
-        this.stage.add(this.background);
+    endGame(gameEvent) {
+        alert(gameEvent.message);
     }
 
     frameLoop() {
-        this.enemies.moveEnemies();
-        this.movePlayer();
-        this.stage.draw();
+        try {
+            this.level.enemies.moveEnemies();
+            this.collisionDetector.detectAll(this.hero, this.level.platforms, this.level.enemies);
+            this.movePlayer();
+            this.stage.draw();
+        } catch(gameEvent) {
+            this.endGame(gameEvent);
+        }
     }
 
     movePlayer() {

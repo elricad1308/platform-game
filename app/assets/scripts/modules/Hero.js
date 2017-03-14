@@ -1,7 +1,7 @@
 import Kinetic from 'kinetic';
 
 // Gravity force that pushes the player towards the bottom.
-const GRAVITY = 0.8;
+const GRAVITY = 0.7;
 
 // Heigth that the player moves upward when jumping
 const JUMP_HEIGHT = -15;
@@ -18,6 +18,7 @@ class Hero extends Kinetic.Rect {
         this.ySpeed = 0;
         this.direction = 1;
         this.counter = 0;
+        this.bounce = 0;
 
         this.bottomLimit = 0;
         this.rightLimit = 0;
