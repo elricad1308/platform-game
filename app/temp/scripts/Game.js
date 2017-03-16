@@ -1,41 +1,41 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
+
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -46,7 +46,7 @@
 /******/ 			});
 /******/ 		}
 /******/ 	};
-/******/
+
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
 /******/ 	__webpack_require__.n = function(module) {
 /******/ 		var getter = module && module.__esModule ?
@@ -55,15 +55,15 @@
 /******/ 		__webpack_require__.d(getter, 'a', getter);
 /******/ 		return getter;
 /******/ 	};
-/******/
+
 /******/ 	// Object.prototype.hasOwnProperty.call
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -15465,7 +15465,89 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Level2 = __webpack_require__(16);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var GameEvent = function GameEvent() {
+    _classCallCheck(this, GameEvent);
+
+    this.type = 0;
+    this.message = 'Normal game event';
+};
+
+exports.default = GameEvent;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+var _EnemyGroup = __webpack_require__(5);
+
+var _EnemyGroup2 = _interopRequireDefault(_EnemyGroup);
+
+var _PlatformGroup = __webpack_require__(7);
+
+var _PlatformGroup2 = _interopRequireDefault(_PlatformGroup);
+
+var _CoinGroup = __webpack_require__(20);
+
+var _CoinGroup2 = _interopRequireDefault(_CoinGroup);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Level = function (_Kinetic$Layer) {
+    _inherits(Level, _Kinetic$Layer);
+
+    function Level() {
+        _classCallCheck(this, Level);
+
+        // Key is used to advance to the next level.
+        var _this = _possibleConstructorReturn(this, (Level.__proto__ || Object.getPrototypeOf(Level)).call(this, {}));
+
+        _this.key = false;
+
+        // Door is the exit point from the level.
+        _this.door = undefined;
+
+        _this.platforms = new _PlatformGroup2.default(0, 0);
+        _this.enemies = new _EnemyGroup2.default(0, 0);
+        _this.coins = new _CoinGroup2.default(0, 0);
+        return _this;
+    }
+
+    return Level;
+}(_kinetic2.default.Layer);
+
+exports.default = Level;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Level2 = __webpack_require__(9);
 
 var _Level3 = _interopRequireDefault(_Level2);
 
@@ -15476,6 +15558,14 @@ var _Platform2 = _interopRequireDefault(_Platform);
 var _Enemy = __webpack_require__(4);
 
 var _Enemy2 = _interopRequireDefault(_Enemy);
+
+var _Coin = __webpack_require__(19);
+
+var _Coin2 = _interopRequireDefault(_Coin);
+
+var _Door = __webpack_require__(21);
+
+var _Door2 = _interopRequireDefault(_Door);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15491,15 +15581,20 @@ var Level01 = function (_Level) {
     function Level01(width, height) {
         _classCallCheck(this, Level01);
 
-        // Creates the platforms
+        // First level does not have a key
         var _this = _possibleConstructorReturn(this, (Level01.__proto__ || Object.getPrototypeOf(Level01)).call(this, {}));
 
+        _this.key = true;
+
+        // Creates the platforms
         var floor = new _Platform2.default(0, height - 15);
         floor.setWidth(width * 2);
 
         _this.platforms.add(floor);
         _this.platforms.add(new _Platform2.default(20, height / 1.5));
         _this.platforms.add(new _Platform2.default(190, height / 3));
+        _this.platforms.add(new _Platform2.default(510, height / 1.6));
+        _this.platforms.add(new _Platform2.default(870, height / 3.9));
 
         // Create the enemies
         _this.enemies.add(new _Enemy2.default(200, height - 75));
@@ -15509,8 +15604,20 @@ var Level01 = function (_Level) {
         _this.enemies.add(new _Enemy2.default(1120, height - 75));
         _this.enemies.add(new _Enemy2.default(1220, height - 75));
 
+        // Create the coins
+        _this.coins.add(new _Coin2.default(350, height / 3 - 130));
+        _this.coins.add(new _Coin2.default(650, height / 2 - 130));
+        _this.coins.add(new _Coin2.default(80, height - 80));
+        _this.coins.add(new _Coin2.default(910, height / 6));
+        _this.coins.add(new _Coin2.default(1220, height - 80));
+
+        // Creates the exit door
+        _this.door = new _Door2.default(910, height - 85);
+
         _this.add(_this.platforms);
         _this.add(_this.enemies);
+        _this.add(_this.coins);
+        _this.add(_this.door);
         return _this;
     }
 
@@ -15520,7 +15627,44 @@ var Level01 = function (_Level) {
 exports.default = Level01;
 
 /***/ }),
-/* 9 */
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Level2 = __webpack_require__(9);
+
+var _Level3 = _interopRequireDefault(_Level2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Level02 = function (_Level) {
+    _inherits(Level02, _Level);
+
+    function Level02(width, height) {
+        _classCallCheck(this, Level02);
+
+        return _possibleConstructorReturn(this, (Level02.__proto__ || Object.getPrototypeOf(Level02)).call(this, {}));
+    }
+
+    return Level02;
+}(_Level3.default);
+
+exports.default = Level02;
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15532,9 +15676,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _EndOfGameEvent = __webpack_require__(14);
+var _EndOfGameEvent = __webpack_require__(17);
 
 var _EndOfGameEvent2 = _interopRequireDefault(_EndOfGameEvent);
+
+var _ExitLevelEvent = __webpack_require__(18);
+
+var _ExitLevelEvent2 = _interopRequireDefault(_ExitLevelEvent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15549,12 +15697,12 @@ var CollisionDetector = function () {
 
     _createClass(CollisionDetector, [{
         key: "detectAll",
-        value: function detectAll(hero, platforms, enemies) {
+        value: function detectAll(hero, level) {
             var that = this;
             var collided = false;
 
             // Detects collisions with enemies
-            enemies.getChildren().forEach(function (enemy) {
+            level.enemies.getChildren().forEach(function (enemy) {
                 // There are two types of collisions with enemies:
                 //   1. If player is falling (hero.ySpeed > 0 [1.a]
                 //      AND hero.getY() < enemy.getY() [1.b]),
@@ -15572,7 +15720,7 @@ var CollisionDetector = function () {
             });
 
             // Detects collisions with platforms
-            platforms.getChildren().forEach(function (platform) {
+            level.platforms.getChildren().forEach(function (platform) {
                 // We're interested in collisions that:
                 //   1. Actually occurs (detectCollision(a, b) is true)
                 //   2. Player is over the platform (hero.getY() < platform.getY())
@@ -15586,6 +15734,24 @@ var CollisionDetector = function () {
                     hero.setY(platform.getY() - hero.getHeight());
                 }
             });
+
+            // Detects collisions with coins
+            level.coins.getChildren().forEach(function (coin) {
+                // Collisions with coins are straightforward:
+                // it they occur, score is rewarded and coin
+                // dissapears from stage.
+                if (that.detectCollision(coin, hero)) {
+                    that.scoreManager.scoreCoin();
+                    coin.remove();
+                }
+            });
+
+            // Detects collision with the exit door
+            // In order to advance to the next level,
+            // player MUST have collected the key.
+            if (that.detectCollision(level.door, hero) && level.key) {
+                throw new _ExitLevelEvent2.default();
+            }
         }
     }, {
         key: "detectCollision",
@@ -15625,7 +15791,7 @@ var CollisionDetector = function () {
 exports.default = CollisionDetector;
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15637,7 +15803,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jquery = __webpack_require__(17);
+var _jquery = __webpack_require__(22);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -15696,7 +15862,7 @@ var Controller = function () {
 exports.default = Controller;
 
 /***/ }),
-/* 11 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15807,7 +15973,7 @@ var Hero = function (_Kinetic$Rect) {
 exports.default = Hero;
 
 /***/ }),
-/* 12 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15819,23 +15985,62 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Score rewarded for killing an enemy
 var ENEMY_VALUE = 500;
+
+// Score rewarded for collecting a coin
+var COIN_VALUE = 10;
 
 var ScoreManager = function () {
     function ScoreManager() {
         _classCallCheck(this, ScoreManager);
 
         this.score = 0;
+        this.text = undefined;
     }
 
     _createClass(ScoreManager, [{
+        key: 'drawScore',
+        value: function drawScore(width) {
+            var that = this;
+
+            this.text = new _kinetic2.default.Text({
+                text: 'Score: ' + that.score,
+                fill: '#222',
+                fontFamily: 'Helvetica',
+                fontSize: 20,
+                height: 25,
+                width: 150,
+                x: width - 150,
+                y: 0
+            });
+
+            return that.text;
+        }
+    }, {
+        key: 'scoreCoin',
+        value: function scoreCoin() {
+            this.score += COIN_VALUE;
+            console.log('+' + COIN_VALUE);
+        }
+    }, {
         key: 'scoreEnemy',
         value: function scoreEnemy() {
             this.score += ENEMY_VALUE;
             console.log('+' + ENEMY_VALUE + '!');
+        }
+    }, {
+        key: 'updateScore',
+        value: function updateScore() {
+            this.text.setText('Score: ' + this.score);
         }
     }]);
 
@@ -15845,8 +16050,8 @@ var ScoreManager = function () {
 exports.default = ScoreManager;
 
 /***/ }),
-/* 13 */,
-/* 14 */
+/* 16 */,
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15856,7 +16061,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _GameEvent2 = __webpack_require__(15);
+var _GameEvent2 = __webpack_require__(8);
 
 var _GameEvent3 = _interopRequireDefault(_GameEvent2);
 
@@ -15887,7 +16092,7 @@ var EndOfGameEvent = function (_GameEvent) {
 exports.default = EndOfGameEvent;
 
 /***/ }),
-/* 15 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15897,19 +16102,37 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _GameEvent2 = __webpack_require__(8);
+
+var _GameEvent3 = _interopRequireDefault(_GameEvent2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var GameEvent = function GameEvent() {
-    _classCallCheck(this, GameEvent);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-    this.type = 0;
-    this.message = 'Normal game event';
-};
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-exports.default = GameEvent;
+var ExitLevelEvent = function (_GameEvent) {
+    _inherits(ExitLevelEvent, _GameEvent);
+
+    function ExitLevelEvent() {
+        _classCallCheck(this, ExitLevelEvent);
+
+        var _this = _possibleConstructorReturn(this, (ExitLevelEvent.__proto__ || Object.getPrototypeOf(ExitLevelEvent)).call(this, {}));
+
+        _this.type = 2;
+        return _this;
+    }
+
+    return ExitLevelEvent;
+}(_GameEvent3.default);
+
+exports.default = ExitLevelEvent;
 
 /***/ }),
-/* 16 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -15923,13 +16146,49 @@ var _kinetic = __webpack_require__(0);
 
 var _kinetic2 = _interopRequireDefault(_kinetic);
 
-var _EnemyGroup = __webpack_require__(5);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _EnemyGroup2 = _interopRequireDefault(_EnemyGroup);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var _PlatformGroup = __webpack_require__(7);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-var _PlatformGroup2 = _interopRequireDefault(_PlatformGroup);
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Coin = function (_Kinetic$Rect) {
+    _inherits(Coin, _Kinetic$Rect);
+
+    function Coin(spawnX, spawnY) {
+        _classCallCheck(this, Coin);
+
+        var _this = _possibleConstructorReturn(this, (Coin.__proto__ || Object.getPrototypeOf(Coin)).call(this, {}));
+
+        _this.setFill('goldenrod');
+        _this.setHeight(30);
+        _this.setWidth(30);
+        _this.setX(spawnX);
+        _this.setY(spawnY);
+        return _this;
+    }
+
+    return Coin;
+}(_kinetic2.default.Rect);
+
+exports.default = Coin;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15939,26 +16198,69 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Level = function (_Kinetic$Layer) {
-    _inherits(Level, _Kinetic$Layer);
+var CoinGroup = function (_Kinetic$Group) {
+    _inherits(CoinGroup, _Kinetic$Group);
 
-    function Level() {
-        _classCallCheck(this, Level);
+    function CoinGroup(originX, originY) {
+        _classCallCheck(this, CoinGroup);
 
-        var _this = _possibleConstructorReturn(this, (Level.__proto__ || Object.getPrototypeOf(Level)).call(this, {}));
+        return _possibleConstructorReturn(this, (CoinGroup.__proto__ || Object.getPrototypeOf(CoinGroup)).call(this, {
+            x: originX,
+            y: originY
+        }));
+    }
 
-        _this.platforms = new _PlatformGroup2.default();
-        _this.enemies = new _EnemyGroup2.default();
+    return CoinGroup;
+}(_kinetic2.default.Group);
+
+exports.default = CoinGroup;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _kinetic = __webpack_require__(0);
+
+var _kinetic2 = _interopRequireDefault(_kinetic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Door = function (_Kinetic$Rect) {
+    _inherits(Door, _Kinetic$Rect);
+
+    function Door(spawnX, spawnY) {
+        _classCallCheck(this, Door);
+
+        var _this = _possibleConstructorReturn(this, (Door.__proto__ || Object.getPrototypeOf(Door)).call(this, {}));
+
+        _this.setFill('darkred');
+        _this.setHeight(70);
+        _this.setWidth(30);
+        _this.setX(spawnX);
+        _this.setY(spawnY);
         return _this;
     }
 
-    return Level;
-}(_kinetic2.default.Layer);
+    return Door;
+}(_kinetic2.default.Rect);
 
-exports.default = Level;
+exports.default = Door;
 
 /***/ }),
-/* 17 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -26185,7 +26487,7 @@ return jQuery;
 
 
 /***/ }),
-/* 18 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26197,7 +26499,7 @@ var _kinetic = __webpack_require__(0);
 
 var _kinetic2 = _interopRequireDefault(_kinetic);
 
-var _Hero = __webpack_require__(11);
+var _Hero = __webpack_require__(14);
 
 var _Hero2 = _interopRequireDefault(_Hero);
 
@@ -26217,21 +26519,25 @@ var _PlatformGroup = __webpack_require__(7);
 
 var _PlatformGroup2 = _interopRequireDefault(_PlatformGroup);
 
-var _Controller = __webpack_require__(10);
+var _Controller = __webpack_require__(13);
 
 var _Controller2 = _interopRequireDefault(_Controller);
 
-var _CollisionDetector = __webpack_require__(9);
+var _CollisionDetector = __webpack_require__(12);
 
 var _CollisionDetector2 = _interopRequireDefault(_CollisionDetector);
 
-var _ScoreManager = __webpack_require__(12);
+var _ScoreManager = __webpack_require__(15);
 
 var _ScoreManager2 = _interopRequireDefault(_ScoreManager);
 
-var _Level = __webpack_require__(8);
+var _Level = __webpack_require__(10);
 
 var _Level2 = _interopRequireDefault(_Level);
+
+var _Level3 = __webpack_require__(11);
+
+var _Level4 = _interopRequireDefault(_Level3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26284,10 +26590,17 @@ var Game = function () {
                 case 1:
                     this.level = new _Level2.default(this.stage.getWidth(), this.stage.getHeight());
                     break;
+
+                case 2:
+                    this.level = new _Level4.default(this.stage.getWidth(), this.stage.getHeight());
+                    break;
             }
 
             // Adds the player to the background
             this.level.add(this.hero);
+
+            // Adds the score to the background
+            this.level.add(this.scoreManager.drawScore(this.stage.getWidth()));
 
             // Adds the background (with the player) to the stage.
             this.stage.add(this.level);
@@ -26295,6 +26608,7 @@ var Game = function () {
     }, {
         key: 'endGame',
         value: function endGame(gameEvent) {
+            clearInterval(this.self);
             alert(gameEvent.message);
         }
     }, {
@@ -26302,11 +26616,20 @@ var Game = function () {
         value: function frameLoop() {
             try {
                 this.level.enemies.moveEnemies();
-                this.collisionDetector.detectAll(this.hero, this.level.platforms, this.level.enemies);
+                this.collisionDetector.detectAll(this.hero, this.level);
                 this.movePlayer();
+                this.scoreManager.updateScore();
                 this.stage.draw();
             } catch (gameEvent) {
-                this.endGame(gameEvent);
+                if (gameEvent.type === 1) {
+                    // Type 1 event: end game
+                    this.endGame(gameEvent);
+                } else if (gameEvent.type === 2) {
+                    // Type 2 event: advance level
+                    this.currentLevel++;
+                    console.log("Welcome to level " + this.currentLevel);
+                    this.drawBackground();
+                }
             }
         }
     }, {

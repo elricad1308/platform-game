@@ -1,4 +1,5 @@
 import EndOfGameEvent from "../events/EndOfGameEvent";
+import ExitLevelEvent from "../events/ExitLevelEvent";
 
 class CollisionDetector {
 
@@ -6,12 +7,12 @@ class CollisionDetector {
         this.scoreManager = scoreMgr;
     }
 
-    detectAll(hero, platforms, enemies) {
+    detectAll(hero, level) {
         var that = this;
         var collided = false;
 
         // Detects collisions with enemies
-        enemies.getChildren().forEach(function(enemy){
+        level.enemies.getChildren().forEach(function(enemy){
             // There are two types of collisions with enemies:
             //   1. If player is falling (hero.ySpeed > 0 [1.a]
             //      AND hero.getY() < enemy.getY() [1.b]),
@@ -28,7 +29,7 @@ class CollisionDetector {
         });
 
         // Detects collisions with platforms
-        platforms.getChildren().forEach(function(platform){
+        level.platforms.getChildren().forEach(function(platform){
             // We're interested in collisions that:
             //   1. Actually occurs (detectCollision(a, b) is true)
             //   2. Player is over the platform (hero.getY() < platform.getY())
@@ -41,6 +42,24 @@ class CollisionDetector {
                 hero.setY(platform.getY() - hero.getHeight());
             }
         });
+
+        // Detects collisions with coins
+        level.coins.getChildren().forEach(function(coin){
+            // Collisions with coins are straightforward:
+            // it they occur, score is rewarded and coin
+            // dissapears from stage.
+            if(that.detectCollision(coin, hero)) {
+                that.scoreManager.scoreCoin();
+                coin.remove();
+            }
+        });
+
+        // Detects collision with the exit door
+        // In order to advance to the next level,
+        // player MUST have collected the key.
+        if(that.detectCollision(level.door, hero) && level.key) {
+            throw new ExitLevelEvent();
+        }
     }
 
     detectCollision(a, b) {

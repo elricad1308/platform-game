@@ -8,6 +8,7 @@ import Controller from './modules/Controller';
 import CollisionDetector from './modules/CollisionDetector';
 import ScoreManager from './modules/ScoreManager';
 import Level01 from './levels/Level01';
+import Level02 from './levels/Level02';
 
 class Game {
 
@@ -52,27 +53,42 @@ class Game {
             case 1:
                 this.level = new Level01(this.stage.getWidth(), this.stage.getHeight());
                 break;
+
+            case 2:
+                this.level = new Level02(this.stage.getWidth(), this.stage.getHeight());
+                break;
         }
 
         // Adds the player to the background
         this.level.add(this.hero);
+
+        // Adds the score to the background
+        this.level.add(this.scoreManager.drawScore(this.stage.getWidth()));
 
         // Adds the background (with the player) to the stage.
         this.stage.add(this.level);
     }
 
     endGame(gameEvent) {
+        clearInterval(this.self);
         alert(gameEvent.message);
     }
 
     frameLoop() {
         try {
             this.level.enemies.moveEnemies();
-            this.collisionDetector.detectAll(this.hero, this.level.platforms, this.level.enemies);
+            this.collisionDetector.detectAll(this.hero, this.level);
             this.movePlayer();
+            this.scoreManager.updateScore();
             this.stage.draw();
         } catch(gameEvent) {
-            this.endGame(gameEvent);
+            if(gameEvent.type === 1) {        // Type 1 event: end game
+                this.endGame(gameEvent);
+            } else if(gameEvent.type === 2) { // Type 2 event: advance level
+                this.currentLevel++;
+                console.log("Welcome to level " + this.currentLevel);
+                this.drawBackground();
+            }
         }
     }
 
